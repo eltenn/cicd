@@ -1,0 +1,12 @@
+sudo: required
+services:
+  - docker
+
+script:
+  - docker build -t node .
+  - docker images node
+before_deploy:
+  - docker login -u $DOCKER_USERNAME  -p $DOCKER_PASSWORD
+deploy:
+  provider: script
+  script: docker push maximelau/node
